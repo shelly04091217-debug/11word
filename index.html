@@ -33,6 +33,8 @@ button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
 #tabs{display:flex;flex-wrap:wrap;gap:5px;justify-content:center}
 #tabs button{font-family:var(--kai);font-size:21px;line-height:1;padding:5px 9px;border-radius:999px;border:1.5px solid var(--line);background:var(--rice);transition:transform .15s}
 #tabs button:hover{transform:translateY(-2px)}
+#tabs button.rr{background:#E3EDCF;border:2px solid var(--deep);color:#4D6B33}
+#tabs button.rr.on{border-color:var(--deep)!important}
 #tabs button.on{background:var(--rose);border-color:var(--rose);color:#4A2E20;font-weight:700}
 
 /* 主舞台 */
@@ -315,8 +317,9 @@ function speak(t){
 }
 function infoHTML(c){const d=INFO[c];if(!d)return"";return `<div><b>部首</b><span>${d[0]}</span></div><div><b>部首筆畫</b><span>${d[1]}</span></div><div><b>部首外筆畫</b><span>${d[2]}</span></div><div><b>總筆畫</b><span>${d[3]}</span></div>`}
 
+const RR=["糯","變"];// 認讀字
 function renderTabs(){
-  $("tabs").innerHTML=LESSON.map((l,i)=>`<button data-i="${i}" class="${i===idx?"on":""}">${l.c}</button>`).join("");
+  $("tabs").innerHTML=LESSON.map((l,i)=>`<button data-i="${i}" class="${RR.includes(l.c)?"rr ":""}${i===idx?"on":""}"${RR.includes(l.c)?' title="認讀字"':''}>${l.c}</button>`).join("");
 }
 function render(){
   const L=LESSON[idx];
